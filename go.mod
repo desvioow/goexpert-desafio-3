@@ -5,6 +5,7 @@ go 1.22.5
 require (
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/spf13/viper v1.19.0
+	github.com/streadway/amqp v1.1.0
 )
 
 require (

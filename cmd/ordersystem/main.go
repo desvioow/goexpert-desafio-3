@@ -3,7 +3,10 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	graphql_handler "github.com/99designs/gqlgen/graphql/handler"
+	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/desvioow/goexpert-desafio-3/configs"
+	"github.com/desvioow/goexpert-desafio-3/graph"
 	"github.com/desvioow/goexpert-desafio-3/internal/event/handler"
 	"github.com/desvioow/goexpert-desafio-3/internal/infra/grpc/pb"
 	"github.com/desvioow/goexpert-desafio-3/internal/infra/grpc/service"
@@ -14,6 +17,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"net"
+	"net/http"
 )
 
 func main() {
@@ -54,6 +58,14 @@ func main() {
 	}
 	go grpcServer.Serve(lis)
 
+	srv := graphql_handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{
+		CreateOrderUseCase: *createOrderUseCase,
+	}}))
+	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
+	http.Handle("/query", srv)
+
+	fmt.Println("Starting GraphQL server on port", configs.GraphQLServerPort)
+	http.ListenAndServe(":"+configs.GraphQLServerPort, nil)
 }
 
 func getRabbitMQChannel() *amqp.Channel {

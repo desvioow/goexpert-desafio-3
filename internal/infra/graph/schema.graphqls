@@ -2,6 +2,11 @@
 #
 # https://gqlgen.com/getting-started/
 
+type Query {
+  order(id: String!): Order
+  orders: [Order]
+}
+
 type Order {
   id: String!
   Price: Float!

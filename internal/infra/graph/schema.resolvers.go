@@ -6,9 +6,10 @@ package graph
 
 import (
 	"context"
-	"github.com/desvioow/goexpert-desafio-3/internal/usecase"
+	"fmt"
+	"github.com/desvioow/goexpert-desafio-3/internal/infra/graph/model"
 
-	"github.com/desvioow/goexpert-desafio-3/graph/model"
+	"github.com/desvioow/goexpert-desafio-3/internal/usecase"
 )
 
 // CreateOrder is the resolver for the createOrder field.
@@ -30,7 +31,21 @@ func (r *mutationResolver) CreateOrder(ctx context.Context, input *model.OrderIn
 	}, nil
 }
 
+// Order is the resolver for the order field.
+func (r *queryResolver) Order(ctx context.Context, id string) (*model.Order, error) {
+	panic(fmt.Errorf("not implemented: Order - order"))
+}
+
+// Orders is the resolver for the orders field.
+func (r *queryResolver) Orders(ctx context.Context) ([]*model.Order, error) {
+	panic(fmt.Errorf("not implemented: Orders - orders"))
+}
+
 // Mutation returns MutationResolver implementation.
 func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
 
+// Query returns QueryResolver implementation.
+func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
+
 type mutationResolver struct{ *Resolver }
+type queryResolver struct{ *Resolver }

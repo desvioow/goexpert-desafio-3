@@ -24,3 +24,28 @@ func (r *OrderRepository) Save(order *entity.Order) error {
 	}
 	return nil
 }
+
+func (r *OrderRepository) ListAll() ([]entity.Order, error) {
+	stmt, err := r.Db.Prepare("SELECT * FROM orders")
+	if err != nil {
+		return []entity.Order{}, err
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query()
+	if err != nil {
+		return []entity.Order{}, err
+	}
+	defer rows.Close()
+
+	var orders []entity.Order
+	for rows.Next() {
+		var order entity.Order
+		err := rows.Scan(&order.ID, &order.Price, &order.Tax, &order.FinalPrice)
+		if err != nil {
+			return []entity.Order{}, err
+		}
+		orders = append(orders, order)
+	}
+	return orders, nil
+}

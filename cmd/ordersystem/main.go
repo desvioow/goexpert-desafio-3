@@ -7,7 +7,7 @@ import (
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/desvioow/goexpert-desafio-3/configs"
 	"github.com/desvioow/goexpert-desafio-3/internal/event/handler"
-	graph "github.com/desvioow/goexpert-desafio-3/internal/infra/graph"
+	"github.com/desvioow/goexpert-desafio-3/internal/infra/graph"
 	"github.com/desvioow/goexpert-desafio-3/internal/infra/grpc/pb"
 	"github.com/desvioow/goexpert-desafio-3/internal/infra/grpc/service"
 	"github.com/desvioow/goexpert-desafio-3/internal/infra/web/webserver"

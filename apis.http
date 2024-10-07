@@ -8,3 +8,8 @@ Content-Type: application/json
     "price": 150,
     "tax": 50
 }
+
+### GET request to list all orders
+GET http://localhost:8000/order HTTP/1.1
+Host: localhost:8000
+Content-Type: application/json

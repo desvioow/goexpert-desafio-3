@@ -32,6 +32,7 @@ go run main.go
 ##### rest - POST /order
 Usar algum cliente REST ou IDE com suporte para arquivos .http
 e executar a request que se encontra no arquivo apis.http
+
 ![image](https://github.com/user-attachments/assets/5aa2a34c-21e5-4425-987d-1610d74fb046)
 
 
@@ -81,7 +82,7 @@ O resultado esperado é sucesso na request e a listagem de todos pedidos criados
 
 ##### graphQL - ListOrders
 Acessar o graphQL playground usando um browser no endpoint http://localhost:8080/.
-Executar a mutation CreateOrder conforme o exemplo a seguir:
+Executar a query ListAllOrders conforme o exemplo a seguir:
 ```
 query ListAllOrders {
   orders {

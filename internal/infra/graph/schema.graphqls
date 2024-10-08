@@ -2,11 +2,6 @@
 #
 # https://gqlgen.com/getting-started/
 
-type Query {
-  order(id: String!): Order
-  orders: [Order]
-}
-
 type Order {
   id: String!
   Price: Float!
@@ -22,4 +17,8 @@ input OrderInput {
 
 type Mutation {
   createOrder(input: OrderInput): Order
+}
+
+type Query {
+  orders: [Order]
 }

@@ -46,10 +46,10 @@ func main() {
 	go webserver.Start()
 
 	createOrderUseCase := NewCreateOrderUseCase(db, eventDispatcher)
-	listAllOrdersUseCase := NewListOrdersUseCase(db)
+	listOrdersUseCase := NewListOrdersUseCase(db)
 
 	grpcServer := grpc.NewServer()
-	orderService := service.NewOrderService(*createOrderUseCase, *listAllOrdersUseCase)
+	orderService := service.NewOrderService(*createOrderUseCase, *listOrdersUseCase)
 	pb.RegisterOrderServiceServer(grpcServer, orderService)
 	reflection.Register(grpcServer)
 
@@ -62,6 +62,7 @@ func main() {
 
 	srv := graphql_handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{
 		CreateOrderUseCase: *createOrderUseCase,
+		ListOrdersUseCase:  *listOrdersUseCase,
 	}}))
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	http.Handle("/query", srv)
